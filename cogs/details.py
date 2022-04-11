@@ -133,45 +133,45 @@ class Details(commands.Cog):
         
         description = utils.char_description(character) + '\n'
         try:
-            description += f'Decimal value: {unicodedata2.decimal(character)}\n'
+            description += f'Decimal value: `{unicodedata2.decimal(character)}`\n'
         except ValueError:
             description += 'Has no decimal value.\n'
         
         try:
-            description += f'Digit value: {unicodedata2.digit(character)}\n'
+            description += f'Digit value: `{unicodedata2.digit(character)}`\n'
         except ValueError:
             description += 'Has no digit value.\n'
         
         try:
-            description += f'Numeric value: {unicodedata2.numeric(character)}\n'
+            description += f'Numeric value: `{unicodedata2.numeric(character)}`\n'
         except ValueError:
             description += 'Has no numeric value.\n'
 
         try:
             category = unicodedata2.category(character)
             cat_name = categories.get(category, '[Unknown category name]')
-            description += f'Category: {cat_name} ({category})\n'
+            description += f'Category: {cat_name} (`{category}`)\n'
         except:
             description += 'Unexpected error while getting category.\n'
         
         try:
             bidi_class = unicodedata2.bidirectional(character)
             bidi_name = bidi_classes.get(bidi_class, '[Unknown bidirectional class name]')
-            description += f'Bidirectional class: {bidi_name} ({bidi_class})\n'
+            description += f'Bidirectional class: {bidi_name} (`{bidi_class}`)\n'
         except:
             description += 'Unexpected error while getting bidirectional class.\n'
 
         try:
             combining_class = unicodedata2.combining(character)
             combining_name = combining_classes.get(combining_class, '[Unknown combining class name]')
-            description += f'Combining class: {combining_name} ({combining_class})\n'
+            description += f'Combining class: {combining_name} (`{combining_class}`)\n'
         except:
             description += 'Unexpected error while getting combining class.\n'
 
         try:
             east_asian_width = unicodedata2.east_asian_width(character)
             east_asian_name = east_asian_width_classes.get(east_asian_width, '[Unknown east asian width name]')
-            description += f'East asian width: {east_asian_name} ({east_asian_width})\n'
+            description += f'East asian width: {east_asian_name} (`{east_asian_width}`)\n'
         except:
             description += 'Unexpected error while getting east asian width.\n'
         
