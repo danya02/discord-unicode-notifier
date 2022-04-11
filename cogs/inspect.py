@@ -3,27 +3,10 @@ import discord
 import unicodedata2
 import utils
 
-SPECIAL_CHARS = {'`': '`` `', '\n': '`\\n`'}
-
 def inspect_text(text):
     output = f'I received the following {len(text)} characters:\n'
     for char in text:
-        if char in SPECIAL_CHARS:
-            escaped = SPECIAL_CHARS[char]
-        else:
-            escaped = '`' + discord.utils.escape_markdown(char) + '`'
-        
-        # The code point is the hex of the char's unicode value, padded to a minimum of 4 chars.
-        codepoint = hex(ord(char))[2:].upper().zfill(4)
-
-        try:
-            name = unicodedata2.name(char)
-        except ValueError:
-            # The character is not in the table.
-            name = '<unknown>'
-
-        output += f'{escaped} `U+{codepoint} {name}`\n'
-
+        output += utils.char_description(char) + '\n'
     return output
 
 class Inspect(commands.Cog):
