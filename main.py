@@ -2,9 +2,12 @@ from discord.ext import commands
 import discord
 import os
 
+from cogs import inspect
+
 DISCORD_TOKEN = os.environ.get('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='&')
+bot.add_cog(inspect.Inspect(bot))
 
 @bot.event
 async def on_ready():
@@ -13,3 +16,6 @@ async def on_ready():
 @bot.command()
 async def ping(ctx):
     await ctx.send('Pong!')
+
+if __name__ == '__main__':
+    bot.run(DISCORD_TOKEN)
