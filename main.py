@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord
 import os
 
-from cogs import inspect, normalize, lookup
+from cogs import inspect, normalize, lookup, details
 
 DISCORD_TOKEN = os.environ.get('DISCORD_TOKEN')
 
@@ -10,6 +10,8 @@ bot = commands.Bot(command_prefix='&')
 bot.add_cog(inspect.Inspect(bot))
 bot.add_cog(normalize.Normalize(bot))
 bot.add_cog(lookup.Lookup(bot))
+bot.add_cog(details.Details(bot))
+
 
 @bot.event
 async def on_ready():
