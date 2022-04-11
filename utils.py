@@ -1,4 +1,5 @@
 import discord
+from more_itertools import split_into
 import unicodedata2
 
 
@@ -14,6 +15,26 @@ def split_into_messages(text, separator='\n'):
             current_message = ''
         current_message += part + separator
     yield current_message
+
+def truncate_to_message(text, separator='\n', notice=lambda x: f"... and {x} more lines."):
+    """
+    Truncate the text to fit into a single message, adding a notice about how many lines were truncated.
+    """
+    messages = list(split_into_messages(text, separator))
+    if len(messages) == 1: return messages
+    msg = messages[0].split(separator)
+    lines = 0
+    for message in messages[1:]:
+        lines += len(message.split(separator))
+
+    while len('\n'.join(msg)) > 2000:
+        msg.pop()
+        lines -= 1
+        msg[-1] = notice(lines)
+
+    return '\n'.join(msg)
+
+
 
 SPECIAL_CHARS = {'\n': '`\\n`'}
 
