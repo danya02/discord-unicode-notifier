@@ -1,7 +1,6 @@
 from discord.ext import commands
 import discord
 import unicodedata2
-import sys
 import utils
 
 SPECIAL_CHARS = {'`': '`` `', '\n': '`\\n`'}
@@ -37,7 +36,7 @@ class Inspect(commands.Cog):
         """Return the version of the Unicode table being used."""
         await ctx.reply(f'Using Unicode table v{unicodedata2.unidata_version}', mention_author=False)
 
-    @commands.cooldown(1, 20, commands.BucketType.guild)
+    @commands.cooldown(2, 15, commands.BucketType.guild)
     @commands.command(name='inspect')
     async def inspect(self, ctx, *, text):
         """Show characters in text in single message."""

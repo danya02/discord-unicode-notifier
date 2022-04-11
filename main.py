@@ -2,12 +2,13 @@ from discord.ext import commands
 import discord
 import os
 
-from cogs import inspect
+from cogs import inspect, normalize
 
 DISCORD_TOKEN = os.environ.get('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='&')
 bot.add_cog(inspect.Inspect(bot))
+bot.add_cog(normalize.Normalize(bot))
 
 @bot.event
 async def on_ready():
